@@ -13,12 +13,16 @@ public class PlayerBehaviour : MonoBehaviour
   public float groundRadius;
   public LayerMask groundLayerMask;
   public bool isGrounded;
+  public PlayerAnimationState animationState;
 
   private Rigidbody2D rigidbody2D;
+  private Animator animator;
+
   // Start is called before the first frame update
   void Start()
   {
     rigidbody2D = GetComponent<Rigidbody2D>();
+    animator = GetComponent<Animator>();
   }
 
   // Update is called once per frame
@@ -36,12 +40,19 @@ public class PlayerBehaviour : MonoBehaviour
     Move(x);
     Flip(x);
     Jump(y);
+    AirCheck();
   }
 
   private void Move(float x)
   {
-    rigidbody2D.AddForce(Vector2.right * x * horitzontalForce * (isGrounded ? 1 : 0));
+    rigidbody2D.AddForce(Vector2.right * x * horitzontalForce * (isGrounded ? 1 : airFactor));
     rigidbody2D.velocity = new Vector2(Mathf.Clamp(rigidbody2D.velocity.x, -maxSpeed, maxSpeed), rigidbody2D.velocity.y);
+
+    if (isGrounded)
+    {
+      animationState = x != 0.0f ? PlayerAnimationState.RUN : PlayerAnimationState.IDLE;
+      animator.SetInteger("AnimationState", (int)animationState);
+    }
   }
 
   private void Jump(float y)
@@ -53,6 +64,17 @@ public class PlayerBehaviour : MonoBehaviour
     }
   }
 
+  private void AirCheck()
+  {
+    if (!isGrounded)
+    {
+      // play jump Animation
+      animationState = PlayerAnimationState.JUMP;
+      animator.SetInteger("AnimationState", (int)animationState);
+
+    }
+  }
+
   private void Flip(float x)
   {
     if (x != 0)
@@ -60,7 +82,6 @@ public class PlayerBehaviour : MonoBehaviour
       transform.localScale = new Vector3((x > 0) ? 1 : -1, 1, 1);
 
     }
-
   }
 
   private void OnDrawGizmos()

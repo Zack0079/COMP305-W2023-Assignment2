@@ -3232,7 +3232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8885a11348bf647acfd9c073afc7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horitzontalForce: 50
+  horitzontalForce: 40
   maxSpeed: 10
   verticalForce: 15
   airFactor: 0
