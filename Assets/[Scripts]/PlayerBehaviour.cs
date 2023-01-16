@@ -7,6 +7,12 @@ public class PlayerBehaviour : MonoBehaviour
   [Header("Player Movement Properties")]
   public float horitzontalForce;
   public float maxSpeed;
+  public float verticalForce;
+  public float airFactor;
+  public Transform groundPoint;
+  public float groundRadius;
+  public LayerMask groundLayerMask;
+  public bool isGround;
 
   private Rigidbody2D rigidbody2D;
   // Start is called before the first frame update
@@ -24,6 +30,10 @@ public class PlayerBehaviour : MonoBehaviour
     Flip(x);
   }
 
+  void FixedUpdate() {
+    isGround = Physics2D.OverlapCircle(groundPoint.position, groundRadius, groundLayerMask);  
+  }
+
   private void Move(float x){
     rigidbody2D.AddForce(Vector2.right * x * horitzontalForce);
     rigidbody2D.velocity = new Vector2(Mathf.Clamp(rigidbody2D.velocity.x, -maxSpeed, maxSpeed), rigidbody2D.velocity.y);
@@ -35,5 +45,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     }
 
+  }
+
+  private void OnDrawGizmos() {
+    Gizmos.color = Color.white;
+    Gizmos.DrawWireSphere(groundPoint.position, groundRadius); 
   }
 }
