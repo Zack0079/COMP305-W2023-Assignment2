@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 158429463}
   - component: {fileID: 158429462}
   - component: {fileID: 158429461}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3232,16 +3232,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8885a11348bf647acfd9c073afc7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horitzontalForce: 2000
+  horitzontalForce: 50
   maxSpeed: 10
-  verticalForce: 0
+  verticalForce: 15
   airFactor: 0
   groundPoint: {fileID: 197899526}
   groundRadius: 0.5
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 0
-  isGround: 0
+    m_Bits: 64
+  isGrounded: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

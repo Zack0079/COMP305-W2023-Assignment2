@@ -12,7 +12,7 @@ public class PlayerBehaviour : MonoBehaviour
   public Transform groundPoint;
   public float groundRadius;
   public LayerMask groundLayerMask;
-  public bool isGround;
+  public bool isGrounded;
 
   private Rigidbody2D rigidbody2D;
   // Start is called before the first frame update
@@ -24,31 +24,48 @@ public class PlayerBehaviour : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    float x = Input.GetAxis("Horizontal") * Time.deltaTime;
-    // float y = Input.GetAxis("Vertical");
+
+  }
+
+  void FixedUpdate()
+  {
+    isGrounded = Physics2D.OverlapCircle(groundPoint.position, groundRadius, groundLayerMask);
+    float x = Input.GetAxis("Horizontal");
+    float y = Input.GetAxis("Jump");
+
     Move(x);
     Flip(x);
+    Jump(y);
   }
 
-  void FixedUpdate() {
-    isGround = Physics2D.OverlapCircle(groundPoint.position, groundRadius, groundLayerMask);  
-  }
-
-  private void Move(float x){
-    rigidbody2D.AddForce(Vector2.right * x * horitzontalForce);
+  private void Move(float x)
+  {
+    rigidbody2D.AddForce(Vector2.right * x * horitzontalForce * (isGrounded ? 1 : 0));
     rigidbody2D.velocity = new Vector2(Mathf.Clamp(rigidbody2D.velocity.x, -maxSpeed, maxSpeed), rigidbody2D.velocity.y);
   }
 
-  private void Flip(float x){
-    if(x!=0){
-      transform.localScale = new Vector3((x > 0) ? 1: -1,1,1);
+  private void Jump(float y)
+  {
+    if (isGrounded && y > 0.0f)
+    {
+      //ForceMode2D.Impulse -> one time force
+      rigidbody2D.AddForce(Vector2.up * verticalForce, ForceMode2D.Impulse);
+    }
+  }
+
+  private void Flip(float x)
+  {
+    if (x != 0)
+    {
+      transform.localScale = new Vector3((x > 0) ? 1 : -1, 1, 1);
 
     }
 
   }
 
-  private void OnDrawGizmos() {
+  private void OnDrawGizmos()
+  {
     Gizmos.color = Color.white;
-    Gizmos.DrawWireSphere(groundPoint.position, groundRadius); 
+    Gizmos.DrawWireSphere(groundPoint.position, groundRadius);
   }
 }
