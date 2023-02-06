@@ -89,4 +89,10 @@ public class PlayerBehaviour : MonoBehaviour
     Gizmos.color = Color.white;
     Gizmos.DrawWireSphere(groundPoint.position, groundRadius);
   }
+
+  private void OnTriggerEnter2D(Collider2D other) {
+    if(other.gameObject.CompareTag("Pickup")){
+      other.gameObject.SetActive(false);
+    }
+  }
 }
