@@ -36,7 +36,7 @@ public class PlayerBehaviour : MonoBehaviour
     isGrounded = Physics2D.OverlapCircle(groundPoint.position, groundRadius, groundLayerMask);
     float x = Input.GetAxis("Horizontal");
     float y = Input.GetAxis("Jump");
-
+// float y = 0f;
     Move(x);
     Flip(x);
     Jump(y);
@@ -57,8 +57,10 @@ public class PlayerBehaviour : MonoBehaviour
 
   private void Jump(float y)
   {
+
     if (isGrounded && y > 0.0f)
     {
+      Debug.Log("jump");
       //ForceMode2D.Impulse -> one time force
       rigidbody2D.AddForce(Vector2.up * verticalForce, ForceMode2D.Impulse);
     }
