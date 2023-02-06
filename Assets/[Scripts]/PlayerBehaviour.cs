@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,11 +20,25 @@ public class PlayerBehaviour : MonoBehaviour
   private Rigidbody2D rigidbody2D;
   private Animator animator;
 
+  [Header("Screen Shake Properties")]
+  public CinemachineVirtualCamera virtualCamera;
+  public CinemachineBasicMultiChannelPerlin perlin;
+  public float shakeIntensity;
+  public float shakeDuration;
+  public float shakeTimer;
+  public bool isCameraShaking;
+
   // Start is called before the first frame update
   void Start()
   {
     rigidbody2D = GetComponent<Rigidbody2D>();
     animator = GetComponent<Animator>();
+
+    // camera
+    isCameraShaking = false;
+    shakeTimer = shakeDuration;
+    virtualCamera = GameObject.Find("Player Camera").GetComponent<CinemachineVirtualCamera>();
+    perlin = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
   }
 
   // Update is called once per frame
@@ -41,6 +56,17 @@ public class PlayerBehaviour : MonoBehaviour
     Move(x);
     Flip(x);
     AirCheck();
+
+    if (isCameraShaking)
+    {
+      shakeTimer -= Time.deltaTime;
+      if (shakeTimer <= 0.0f)
+      {
+        perlin.m_AmplitudeGain = 0.0f;
+        shakeTimer = shakeDuration;
+        isCameraShaking = false;
+      }
+    }
   }
 
   private void Move(float x)
@@ -84,15 +110,33 @@ public class PlayerBehaviour : MonoBehaviour
     }
   }
 
+  private void ShakeCamera()
+  {
+    perlin.m_AmplitudeGain = shakeIntensity;
+    isCameraShaking = true;
+  }
+
   private void OnDrawGizmos()
   {
     Gizmos.color = Color.white;
     Gizmos.DrawWireSphere(groundPoint.position, groundRadius);
   }
 
-  private void OnTriggerEnter2D(Collider2D other) {
-    if(other.gameObject.CompareTag("Pickup")){
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.gameObject.CompareTag("Pickup"))
+    {
       other.gameObject.SetActive(false);
+      // make interesting sound;
+      // get game points;
     }
+
+    if (other.gameObject.CompareTag("Hazard"))
+    {
+      ShakeCamera();
+      // make an interesting sound (hurt sound)
+      // lose lealth;
+    }
+
   }
 }
