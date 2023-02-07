@@ -4,8 +4,9 @@ public enum SoundFX
 {
   JUMP,
   HURT,
-  GEM,
   DEATH,
+  GEM,
   BULLET,
-  MUSIC
+  MAINMUSIC,
+  STARTMUSIC
 }
