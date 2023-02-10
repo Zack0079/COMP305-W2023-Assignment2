@@ -25,15 +25,20 @@ public class PlayerBehaviour : MonoBehaviour
   public float shakeTimer;
   public bool isCameraShaking;
 
-  private Rigidbody2D rigidbody2D;
-  private Animator animator;
+
+  [Header("Player Body Properties")]
+  public Transform playerBody;
+  public Rigidbody2D playerRigidbody2D;
+  public Animator animator;
+
   private SoundManager soundManager;
 
   // Start is called before the first frame update
   void Start()
   {
-    rigidbody2D = GetComponent<Rigidbody2D>();
-    animator = GetComponent<Animator>();
+    // playerRigidbody2D = GetComponentInChildren<Rigidbody2D>();
+    // animator = GetComponentInChildren<Animator>();
+    // playerBody = GetComponentInChildren<Transform>();
     soundManager = FindObjectOfType<SoundManager>();
 
     // camera
@@ -73,8 +78,8 @@ public class PlayerBehaviour : MonoBehaviour
 
   private void Move(float x)
   {
-    rigidbody2D.AddForce(Vector2.right * x * horitzontalForce * (isGrounded ? 1 : airFactor));
-    rigidbody2D.velocity = new Vector2(Mathf.Clamp(rigidbody2D.velocity.x, -maxSpeed, maxSpeed), rigidbody2D.velocity.y);
+    playerRigidbody2D.AddForce(Vector2.right * x * horitzontalForce * (isGrounded ? 1 : airFactor));
+    playerRigidbody2D.velocity = new Vector2(Mathf.Clamp(playerRigidbody2D.velocity.x, -maxSpeed, maxSpeed), playerRigidbody2D.velocity.y);
 
     if (isGrounded)
     {
@@ -88,7 +93,7 @@ public class PlayerBehaviour : MonoBehaviour
     if (isGrounded && y > 0.0f)
     {
       //ForceMode2D.Impulse -> one time force
-      rigidbody2D.AddForce(Vector2.up * verticalForce, ForceMode2D.Impulse);
+      playerRigidbody2D.AddForce(Vector2.up * verticalForce, ForceMode2D.Impulse);
       soundManager.PlaySoundFX(Channel.PLAYER_SOUND_FX, SoundFX.JUMP);
     }
   }
@@ -108,7 +113,7 @@ public class PlayerBehaviour : MonoBehaviour
   {
     if (x != 0)
     {
-      transform.localScale = new Vector3((x > 0) ? 1 : -1, 1, 1);
+      playerBody.localScale = new Vector3((x > 0) ? 1 : -1, 1, 1);
 
     }
   }
@@ -125,6 +130,7 @@ public class PlayerBehaviour : MonoBehaviour
     Gizmos.DrawWireSphere(groundPoint.position, groundRadius);
   }
 
+//TODO: Need to move to player body
   private void OnTriggerEnter2D(Collider2D other)
   {
     if (other.gameObject.CompareTag("Pickup"))
