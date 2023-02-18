@@ -29,10 +29,13 @@ public class PlayerBehaviour : MonoBehaviour
 
   [Header("Health System")]
   public HealthSystem health;
+  public LifeCounter life;
+
 
   private Rigidbody2D playerRigidbody2D;
   private Animator animator;
   private SoundManager soundManager;
+  private DeathPlaneController deathPlaneController;
 
   // Start is called before the first frame update
   void Start()
@@ -41,6 +44,8 @@ public class PlayerBehaviour : MonoBehaviour
     animator = GetComponent<Animator>();
     soundManager = FindObjectOfType<SoundManager>();
     health = FindObjectOfType<PlayerHealthSystem>().GetComponent<HealthSystem>();
+    life = FindObjectOfType<LifeCounter>();
+    deathPlaneController = FindObjectOfType<DeathPlaneController>();
     // camera
     isCameraShaking = false;
     shakeTimer = shakeDuration;
@@ -53,6 +58,23 @@ public class PlayerBehaviour : MonoBehaviour
   {
     var y = Convert.ToInt32(Input.GetKeyDown(KeyCode.Space));
     Jump(y);
+
+    if (health.value <= 0)
+    {
+      life.LoseLife();
+      
+      if (life.value > 0)
+      {
+        health.RestHealth();
+        deathPlaneController.ReSpawn(this.gameObject);
+        soundManager.PlaySoundFX(Channel.PLAYER_DEATH_FX, SoundFX.DEATH);
+      }
+
+      if (life.value <= 0)
+      {
+        // TODO: change to end scene
+      }
+    }
   }
 
   void FixedUpdate()
@@ -130,7 +152,7 @@ public class PlayerBehaviour : MonoBehaviour
     Gizmos.DrawWireSphere(groundPoint.position, groundRadius);
   }
 
-//TODO: Need to move to player body
+  //TODO: Need to move to player body
   private void OnTriggerEnter2D(Collider2D other)
   {
     if (other.gameObject.CompareTag("Pickup"))
