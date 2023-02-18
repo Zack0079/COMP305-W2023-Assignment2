@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
   [Header("Player Movement Properties")]
-  public float horitzontalForce;
+  public float horizontalForce;
   public float maxSpeed;
   public float verticalForce;
   public float airFactor;
@@ -15,7 +15,6 @@ public class PlayerBehaviour : MonoBehaviour
   public float groundRadius;
   public bool isGrounded;
   public LayerMask groundLayerMask;
-  public PlayerAnimationState animationState;
 
   [Header("Screen Shake Properties")]
   public CinemachineVirtualCamera virtualCamera;
@@ -25,20 +24,18 @@ public class PlayerBehaviour : MonoBehaviour
   public float shakeTimer;
   public bool isCameraShaking;
 
+  [Header("Animation Properties")]
+  public PlayerAnimationState animationState;
 
-  [Header("Player Body Properties")]
-  public Transform playerBody;
-  public Rigidbody2D playerRigidbody2D;
-  public Animator animator;
-
+  private Rigidbody2D playerRigidbody2D;
+  private Animator animator;
   private SoundManager soundManager;
 
   // Start is called before the first frame update
   void Start()
   {
-    // playerRigidbody2D = GetComponentInChildren<Rigidbody2D>();
-    // animator = GetComponentInChildren<Animator>();
-    // playerBody = GetComponentInChildren<Transform>();
+    playerRigidbody2D = GetComponent<Rigidbody2D>();
+    animator = GetComponent<Animator>();
     soundManager = FindObjectOfType<SoundManager>();
 
     // camera
@@ -78,7 +75,7 @@ public class PlayerBehaviour : MonoBehaviour
 
   private void Move(float x)
   {
-    playerRigidbody2D.AddForce(Vector2.right * x * horitzontalForce * (isGrounded ? 1 : airFactor));
+    playerRigidbody2D.AddForce(Vector2.right * x * horizontalForce * (isGrounded ? 1 : airFactor));
     playerRigidbody2D.velocity = new Vector2(Mathf.Clamp(playerRigidbody2D.velocity.x, -maxSpeed, maxSpeed), playerRigidbody2D.velocity.y);
 
     if (isGrounded)
@@ -113,7 +110,7 @@ public class PlayerBehaviour : MonoBehaviour
   {
     if (x != 0)
     {
-      playerBody.localScale = new Vector3((x > 0) ? 1 : -1, 1, 1);
+      transform.localScale = new Vector3((x > 0) ? 1 : -1, 1, 1);
 
     }
   }
