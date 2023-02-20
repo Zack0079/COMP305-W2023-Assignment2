@@ -5892,14 +5892,15 @@ MonoBehaviour:
   horizontalSpeed: 1
   inFrontCheck: {fileID: 1763768706}
   groundAheadCheck: {fileID: 44659478}
-  GroundPoint: {fileID: 1255582775}
+  groundPoint: {fileID: 1255582775}
   groundRadius: 0.5
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 192
   isObstracleInFront: 0
   isGrounded: 0
   isGroundAhead: 0
+  direction: {x: 0, y: 0}
 --- !u!1 &448847719
 GameObject:
   m_ObjectHideFlags: 0
@@ -12392,10 +12393,6 @@ PrefabInstance:
     - target: {fileID: 1559128266700469463, guid: 8be2a43920e75344bb926ba338615e30, type: 3}
       propertyPath: m_Name
       value: Pickup
-      objectReference: {fileID: 0}
-    - target: {fileID: 1559128266700469463, guid: 8be2a43920e75344bb926ba338615e30, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
