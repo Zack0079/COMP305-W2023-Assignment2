@@ -37,7 +37,7 @@ Transform:
   - {fileID: 6929580059849932952}
   - {fileID: 6929580061049987001}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6929580059747173103
 SpriteRenderer:
@@ -137,7 +137,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &6929580059747173101
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65ffa3fd2356454c85ae01d11c57262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalSpeed: 1
+  horizontalSpeed: 2
   inFrontCheck: {fileID: 6929580061602728460}
   groundAheadCheck: {fileID: 6929580059849932952}
   groundPoint: {fileID: 6929580061049987001}

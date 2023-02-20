@@ -24,7 +24,8 @@ public class SoundManager : MonoBehaviour
     audioClips.Add(Resources.Load<AudioClip>("Audio/death-sound")); //2
     audioClips.Add(Resources.Load<AudioClip>("Audio/gem-sound")); //3
     audioClips.Add(Resources.Load<AudioClip>("Audio/bullet-sound")); //4
-    
+    audioClips.Add(Resources.Load<AudioClip>("Audio/growl-sound")); //7
+
       //preload music
     audioClips.Add(Resources.Load<AudioClip>("Audio/main-soundtrack")); //5
     audioClips.Add(Resources.Load<AudioClip>("Audio/start-soundtrack")); //6
@@ -37,6 +38,12 @@ public class SoundManager : MonoBehaviour
   {
     audioSources[(int)channel].clip = audioClips[(int)sound]; // loads the clips
     audioSources[(int)channel].Play();
+  }
+
+  public void StopSoundFX(Channel channel, SoundFX sound)
+  {
+    audioSources[(int)channel].clip = audioClips[(int)sound]; // loads the clips
+    audioSources[(int)channel].Stop();
   }
 
   public void PlayMusic()

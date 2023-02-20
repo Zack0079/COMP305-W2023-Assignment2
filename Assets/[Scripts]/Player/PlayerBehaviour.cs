@@ -30,7 +30,10 @@ public class PlayerBehaviour : MonoBehaviour
   [Header("Health System")]
   public HealthSystem health;
   public LifeCounter life;
+  public bool isCollidingWithEnemy;
 
+  [Header("Collision Response")]
+  public float bounceFore;
 
   private Rigidbody2D playerRigidbody2D;
   private Animator animator;
@@ -46,6 +49,8 @@ public class PlayerBehaviour : MonoBehaviour
     health = FindObjectOfType<PlayerHealthSystem>().GetComponent<HealthSystem>();
     life = FindObjectOfType<LifeCounter>();
     deathPlaneController = FindObjectOfType<DeathPlaneController>();
+    isCollidingWithEnemy = false;
+
     // camera
     isCameraShaking = false;
     shakeTimer = shakeDuration;
@@ -62,7 +67,7 @@ public class PlayerBehaviour : MonoBehaviour
     if (health.value <= 0)
     {
       life.LoseLife();
-      
+
       if (life.value > 0)
       {
         health.RestHealth();
@@ -167,7 +172,41 @@ public class PlayerBehaviour : MonoBehaviour
       ShakeCamera();
       soundManager.PlaySoundFX(Channel.PLAYER_HURT_FX, SoundFX.HURT);
       health.TakeDamge(30);
+      playerRigidbody2D.AddForce(new Vector2(bounceFore * (playerRigidbody2D.velocity.x > 0.0 ? -1.0f : 1.0f), 0.0f), ForceMode2D.Impulse);
     }
+  }
 
+  private void OnCollisionEnter2D(Collision2D other)
+  {
+    if (other.gameObject.CompareTag("Enemy"))
+    {
+      ShakeCamera();
+      soundManager.PlaySoundFX(Channel.PLAYER_HURT_FX, SoundFX.HURT);
+      health.TakeDamge(20);
+      playerRigidbody2D.AddForce(new Vector2(bounceFore * (playerRigidbody2D.velocity.x > 0.0 ? -1.0f : 1.0f), 0.0f), ForceMode2D.Impulse);
+    }
+  }
+
+  private void OnCollisionStay2D(Collision2D other)
+  {
+    if (other.gameObject.CompareTag("Enemy"))
+    {
+      ShakeCamera();
+      if (!isCollidingWithEnemy)
+      {
+        soundManager.PlaySoundFX(Channel.GROWL, SoundFX.GROWL);
+        isCollidingWithEnemy = true;
+      }
+      health.TakeDamge(1);
+    }
+  }
+
+  private void OnCollisionExit2D(Collision2D other)
+  {
+    if (other.gameObject.CompareTag("Enemy"))
+    {
+      soundManager.StopSoundFX(Channel.GROWL, SoundFX.GROWL);
+      isCollidingWithEnemy = false;
+    }
   }
 }

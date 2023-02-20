@@ -7,6 +7,7 @@ public enum SoundFX
   DEATH,
   GEM,
   BULLET,
+  GROWL,
   MAINMUSIC,
   STARTMUSIC
 }
