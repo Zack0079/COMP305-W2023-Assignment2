@@ -157,7 +157,6 @@ public class PlayerBehaviour : MonoBehaviour
     Gizmos.DrawWireSphere(groundPoint.position, groundRadius);
   }
 
-  //TODO: Need to move to player body
   private void OnTriggerEnter2D(Collider2D other)
   {
     if (other.gameObject.CompareTag("Pickup"))
@@ -173,6 +172,14 @@ public class PlayerBehaviour : MonoBehaviour
       soundManager.PlaySoundFX(Channel.PLAYER_HURT_FX, SoundFX.HURT);
       health.TakeDamge(30);
       playerRigidbody2D.AddForce(new Vector2(bounceFore * (playerRigidbody2D.velocity.x > 0.0 ? -1.0f : 1.0f), 0.0f), ForceMode2D.Impulse);
+    }
+
+    if (other.gameObject.CompareTag("Bullet"))
+    {
+      ShakeCamera();
+      soundManager.PlaySoundFX(Channel.PLAYER_HURT_FX, SoundFX.HURT);
+      health.TakeDamge(10);
+      playerRigidbody2D.AddForce(new Vector2(bounceFore * 0.5f * (other.GetComponent<Rigidbody2D>().velocity.x > 0.0 ? 1.0f : -1.0f), 0.0f), ForceMode2D.Impulse);
     }
   }
 
