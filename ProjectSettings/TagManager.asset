@@ -12,6 +12,7 @@ TagManager:
   - Hazard
   - Enemy
   - Bullet
+  - Ramp
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Enemy
   - Pickup
   - Bullet
-  - 
+  - Ramp
   - 
   - 
   - 

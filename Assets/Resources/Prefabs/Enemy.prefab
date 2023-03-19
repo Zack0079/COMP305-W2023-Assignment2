@@ -72,7 +72,7 @@ Transform:
   - {fileID: 6929580061049987001}
   - {fileID: 1431010245993502920}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6929580059747173103
 SpriteRenderer:
@@ -305,6 +305,7 @@ MonoBehaviour:
   fireDelay: 20
   bulletSpawn: {fileID: 1431010245993502920}
   bulletPrefab: {fileID: 7889003397428287856, guid: f937d983102ffb94da3720325bb01e78, type: 3}
+  bulletParent: {fileID: 0}
 --- !u!1 &6929580059849932955
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6929580059849932955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2, y: -0.952, z: 0}
+  m_LocalPosition: {x: -0.9, y: -1.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

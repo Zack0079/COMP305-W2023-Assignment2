@@ -16,6 +16,12 @@ public class PlayerBehaviour : MonoBehaviour
   public bool isGrounded;
   public LayerMask groundLayerMask;
 
+  [Header("Ramp Detection")]
+  public Transform inFrontCheck;
+  public LayerMask rampLayerMask;
+  public RampDirection rampDirection;
+  public bool isRampInFront;
+
   [Header("Screen Shake Properties")]
   public CinemachineVirtualCamera virtualCamera;
   public CinemachineBasicMultiChannelPerlin perlin;
@@ -43,6 +49,7 @@ public class PlayerBehaviour : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
+    rampDirection = RampDirection.NONE;
     playerRigidbody2D = GetComponent<Rigidbody2D>();
     animator = GetComponent<Animator>();
     soundManager = FindObjectOfType<SoundManager>();
@@ -87,6 +94,14 @@ public class PlayerBehaviour : MonoBehaviour
     isGrounded = Physics2D.OverlapCircle(groundPoint.position, groundRadius, groundLayerMask);
     var x = Input.GetAxis("Horizontal");
 
+    isRampInFront = Physics2D.Raycast(
+      transform.position,
+      (inFrontCheck.position - transform.position).normalized,
+      (inFrontCheck.position - transform.position).magnitude,
+      rampLayerMask
+    );
+
+
     Move(x);
     Flip(x);
     AirCheck();
@@ -105,7 +120,9 @@ public class PlayerBehaviour : MonoBehaviour
 
   private void Move(float x)
   {
-    playerRigidbody2D.AddForce(Vector2.right * x * horizontalForce * (isGrounded ? 1 : airFactor));
+    playerRigidbody2D.AddForce(Vector2.right * x * horizontalForce * (isGrounded ? 1.0f : airFactor));
+        playerRigidbody2D.AddForce(Vector2.up * (isRampInFront ? verticalForce : 0.0f));
+
     playerRigidbody2D.velocity = new Vector2(Mathf.Clamp(playerRigidbody2D.velocity.x, -maxSpeed, maxSpeed), playerRigidbody2D.velocity.y);
 
     if (isGrounded)
@@ -153,8 +170,9 @@ public class PlayerBehaviour : MonoBehaviour
 
   private void OnDrawGizmos()
   {
-    Gizmos.color = Color.white;
+    Gizmos.color = Color.magenta;
     Gizmos.DrawWireSphere(groundPoint.position, groundRadius);
+    Gizmos.DrawLine(transform.position, inFrontCheck.position);
   }
 
   private void OnTriggerEnter2D(Collider2D other)
@@ -180,6 +198,32 @@ public class PlayerBehaviour : MonoBehaviour
       soundManager.PlaySoundFX(Channel.PLAYER_HURT_FX, SoundFX.HURT);
       health.TakeDamge(10);
       playerRigidbody2D.AddForce(new Vector2(bounceFore * 0.5f * (other.GetComponent<Rigidbody2D>().velocity.x > 0.0 ? 1.0f : -1.0f), 0.0f), ForceMode2D.Impulse);
+    }
+  }
+
+  private void OnTriggerStay2D(Collider2D other)
+  {
+    if (other.gameObject.CompareTag("Ramp"))
+    {
+      if (isRampInFront)
+      {
+        rampDirection = RampDirection.UP;
+        transform.eulerAngles = new Vector3(0, 0, 25f * transform.localScale.x);
+      }
+      else
+      {
+        rampDirection = RampDirection.DOWN;
+        transform.eulerAngles = new Vector3(0, 0, 25f * transform.localScale.x);
+
+      }
+    }
+  }
+  private void OnTriggerExit2D(Collider2D other)
+  {
+    if (other.gameObject.CompareTag("Ramp"))
+    {
+      rampDirection = RampDirection.NONE;
+      transform.eulerAngles = new Vector3(0, 0, 0);
     }
   }
 

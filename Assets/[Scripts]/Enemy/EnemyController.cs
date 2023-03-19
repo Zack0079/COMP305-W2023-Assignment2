@@ -17,6 +17,12 @@ public class EnemyController : MonoBehaviour
   public bool isGroundAhead;
   public Vector2 direction;
 
+  [Header("Ramp Detection")]
+  // public Transform inFrontCheck;
+  public LayerMask rampLayerMask;
+  public RampDirection rampDirection;
+  public bool isRampInFront;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -63,4 +69,21 @@ public class EnemyController : MonoBehaviour
     Gizmos.DrawLine(groundPoint.position, inFrontCheck.position);
     Gizmos.DrawLine(groundPoint.position, groundAheadCheck.position);
   }
+
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.gameObject.CompareTag("Ramp"))
+    {
+      rampDirection = isRampInFront ? RampDirection.UP : RampDirection.DOWN;
+    }
+  }
+
+  private void OnTriggerExit2D(Collider2D other)
+  {
+    if (other.gameObject.CompareTag("Ramp"))
+    {
+      rampDirection = RampDirection.NONE;
+    }
+  }
+
 }
