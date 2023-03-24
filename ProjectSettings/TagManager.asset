@@ -65,6 +65,9 @@ TagManager:
   - name: Bullet
     uniqueID: 2368890667
     locked: 0
+  - name: Dust Trail
+    uniqueID: 239619879
+    locked: 0
   - name: Player
     uniqueID: 443797769
     locked: 0

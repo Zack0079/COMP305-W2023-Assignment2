@@ -41,6 +41,11 @@ public class PlayerBehaviour : MonoBehaviour
   [Header("Collision Response")]
   public float bounceFore;
 
+
+  [Header("Dust Trail Properties")]
+  public ParticleSystem dustTrailParticleSystem;
+  public Color dustTrailColor;
+
   private Rigidbody2D playerRigidbody2D;
   private Animator animator;
   private SoundManager soundManager;
@@ -63,6 +68,10 @@ public class PlayerBehaviour : MonoBehaviour
     shakeTimer = shakeDuration;
     virtualCamera = GameObject.Find("Player Camera").GetComponent<CinemachineVirtualCamera>();
     perlin = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+    // dust trail
+    dustTrailParticleSystem = GetComponent<ParticleSystem>();
+
   }
 
   // Update is called once per frame
@@ -121,12 +130,16 @@ public class PlayerBehaviour : MonoBehaviour
   private void Move(float x)
   {
     playerRigidbody2D.AddForce(Vector2.right * x * horizontalForce * (isGrounded ? 1.0f : airFactor));
-        playerRigidbody2D.AddForce(Vector2.up * (isRampInFront ? verticalForce : 0.0f));
+    playerRigidbody2D.AddForce(Vector2.up * (isRampInFront ? verticalForce : 0.0f));
 
     playerRigidbody2D.velocity = new Vector2(Mathf.Clamp(playerRigidbody2D.velocity.x, -maxSpeed, maxSpeed), playerRigidbody2D.velocity.y);
 
     if (isGrounded)
     {
+      if (x != 0.0f)
+      {
+        CreateDustTrail();
+      }
       animationState = x != 0.0f ? PlayerAnimationState.RUN : PlayerAnimationState.IDLE;
       animator.SetInteger("AnimationState", (int)animationState);
     }
@@ -139,6 +152,7 @@ public class PlayerBehaviour : MonoBehaviour
       //ForceMode2D.Impulse -> one time force
       playerRigidbody2D.AddForce(Vector2.up * verticalForce, ForceMode2D.Impulse);
       soundManager.PlaySoundFX(Channel.PLAYER_SOUND_FX, SoundFX.JUMP);
+      CreateDustTrail();
     }
   }
 
@@ -160,6 +174,12 @@ public class PlayerBehaviour : MonoBehaviour
       transform.localScale = new Vector3((x > 0) ? 1 : -1, 1, 1);
 
     }
+  }
+
+  public void CreateDustTrail()
+  {
+    dustTrailParticleSystem.GetComponent<ParticleSystemRenderer>().material.SetColor("_Color", dustTrailColor);
+    dustTrailParticleSystem.Play();
   }
 
   private void ShakeCamera()
