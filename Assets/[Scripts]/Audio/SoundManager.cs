@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class SoundManager : MonoBehaviour
@@ -26,11 +27,19 @@ public class SoundManager : MonoBehaviour
     audioClips.Add(Resources.Load<AudioClip>("Audio/bullet-sound")); //4
     audioClips.Add(Resources.Load<AudioClip>("Audio/growl-sound")); //7
 
-      //preload music
-    audioClips.Add(Resources.Load<AudioClip>("Audio/main-soundtrack")); //5
+    //preload music
+    switch (SceneManager.GetActiveScene().name)
+    {
+      case "Start":
+        audioClips.Add(Resources.Load<AudioClip>("Audio/start-soundtrack")); //5
+        break;
+      case "Main":
+        audioClips.Add(Resources.Load<AudioClip>("Audio/main-soundtrack")); //5
+        break;
+    }
     audioClips.Add(Resources.Load<AudioClip>("Audio/start-soundtrack")); //6
 
-  
+
 
   }
 
