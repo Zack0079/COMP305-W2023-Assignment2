@@ -1,5 +1,5 @@
 [System.Serializable]
-public enum TaskState
+public enum ProgressState
 {
   ABANDONED,
   COMPLETED,

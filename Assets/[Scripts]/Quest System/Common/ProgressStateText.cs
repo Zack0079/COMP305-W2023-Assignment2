@@ -1,5 +1,5 @@
 [System.Serializable]
-public struct TaskStateText
+public struct ProgressStateText
 {
  public string abandoned;
  public string completed;
