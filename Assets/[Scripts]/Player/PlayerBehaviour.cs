@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -90,11 +91,10 @@ public class PlayerBehaviour : MonoBehaviour
         deathPlaneController.ReSpawn(this.gameObject);
         soundManager.PlaySoundFX(Channel.PLAYER_DEATH_FX, SoundFX.DEATH);
       }
-
-      if (life.value <= 0)
-      {
-        // TODO: change to end scene
-      }
+    }
+    if (life.value <= 0)
+    {
+      SceneManager.LoadScene("End");
     }
   }
 

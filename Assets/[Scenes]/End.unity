@@ -255,12 +255,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1189394648}
+  m_Father: {fileID: 306457456}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5, y: -77}
+  m_AnchoredPosition: {x: 0, y: 6}
   m_SizeDelta: {x: 183.20001, y: 37.660004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &108438068
@@ -391,7 +391,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 108438067}
   m_Father: {fileID: 1189394648}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -513,7 +514,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8549108789114773263}
           m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-          m_MethodName: OnStartButton_Down
+          m_MethodName: OnButton_Down
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -529,7 +530,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8549108789114773263}
           m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-          m_MethodName: OnStartButton_Up
+          m_MethodName: OnButton_Up
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -902,7 +903,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 306457456}
-  - {fileID: 108438067}
   - {fileID: 714737621}
   m_Father: {fileID: 59247315}
   m_RootOrder: -1
