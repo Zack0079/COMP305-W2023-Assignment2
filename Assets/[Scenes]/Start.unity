@@ -250,8 +250,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108438066}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00019538403}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -285,8 +285,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5aebe182da2308044b6bc44d6ccf8e9b, type: 2}
-  m_sharedMaterial: {fileID: 1568859534453168428, guid: 5aebe182da2308044b6bc44d6ccf8e9b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: edbe25aeb0c4c354cb56f618c4617518, type: 2}
+  m_sharedMaterial: {fileID: -6564224573094140562, guid: edbe25aeb0c4c354cb56f618c4617518, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -294,7 +294,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4282231013
   m_fontColor: {r: 0.8980393, g: 0.65882355, b: 0.2392157, a: 1}
-  m_enableVertexGradient: 1
+  m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -310,7 +310,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.7
+  m_fontSize: 33.5
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -514,7 +514,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8549108789114773263}
           m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-          m_MethodName: OnStartButton_Down
+          m_MethodName: OnButton_Down
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -530,7 +530,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8549108789114773263}
           m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-          m_MethodName: OnStartButton_Up
+          m_MethodName: OnButton_Up
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -684,15 +684,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Squirrel Run!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5aebe182da2308044b6bc44d6ccf8e9b, type: 2}
-  m_sharedMaterial: {fileID: 1568859534453168428, guid: 5aebe182da2308044b6bc44d6ccf8e9b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a021abdada74db64091ab5d348167226, type: 2}
+  m_sharedMaterial: {fileID: -5207989893404482578, guid: a021abdada74db64091ab5d348167226, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282231013
-  m_fontColor: {r: 0.8980393, g: 0.65882355, b: 0.2392157, a: 1}
+    rgba: 4279006927
+  m_fontColor: {r: 0.8117648, g: 0.46274513, b: 0.04705883, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -902,8 +902,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 306457456}
   - {fileID: 714737621}
+  - {fileID: 306457456}
   m_Father: {fileID: 59247315}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2147,7 +2147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   miniMap: {fileID: 0}
-  startButtonLabel: {fileID: 108438068}
+  buttonLabel: {fileID: 108438068}
 --- !u!1 &8549108789114773296
 GameObject:
   m_ObjectHideFlags: 0

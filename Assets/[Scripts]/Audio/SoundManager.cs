@@ -36,6 +36,9 @@ public class SoundManager : MonoBehaviour
       case "Main":
         audioClips.Add(Resources.Load<AudioClip>("Audio/main-soundtrack")); //5
         break;
+      case "End":
+        audioClips.Add(Resources.Load<AudioClip>("Audio/end-soundtrack")); //5
+        break;
     }
     audioClips.Add(Resources.Load<AudioClip>("Audio/start-soundtrack")); //6
 

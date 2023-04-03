@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class UIController : MonoBehaviour
 {
   public GameObject miniMap;
-  public TMP_Text startButtonLabel;
+  public TMP_Text buttonLabel;
 
   // Start is called before the first frame update
   void Start()
@@ -33,14 +33,19 @@ public class UIController : MonoBehaviour
     SceneManager.LoadScene("Main");
   }
 
-  public void OnStartButton_Down()
+    public void OnRestartButton_Press()
   {
-    startButtonLabel.rectTransform.localPosition = new Vector3(0.0f, -6.0f, 0.0f);
+    SceneManager.LoadScene("Main");
   }
 
-  public void OnStartButton_Up()
+  public void OnButton_Down()
   {
-    startButtonLabel.rectTransform.localPosition = new Vector3(0.0f, 6.0f, 0.0f);
+    buttonLabel.rectTransform.localPosition = new Vector3(0.0f, -6.0f, 0.0f);
+  }
+
+  public void OnButton_Up()
+  {
+    buttonLabel.rectTransform.localPosition = new Vector3(0.0f, 6.0f, 0.0f);
   }
 
 }
