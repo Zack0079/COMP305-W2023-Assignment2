@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class BulletManger : MonoBehaviour
+public class BulletManager : MonoBehaviour
 {
   [Header("Bullet Pool Properties")]
   public int poolSize;

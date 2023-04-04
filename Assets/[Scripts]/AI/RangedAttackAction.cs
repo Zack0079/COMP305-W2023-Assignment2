@@ -9,11 +9,11 @@ public class RangedAttackAction : MonoBehaviour, Action
   public int fireDelay = 20;
   public Transform bulletSpawn;
 
-  public BulletManger bulletManger;
+  public BulletManager bulletManager;
 
   void Start()
   {
-    bulletManger = FindObjectOfType<BulletManger>();
+    bulletManager = FindObjectOfType<BulletManager>();
 
   }
 
@@ -32,7 +32,7 @@ public class RangedAttackAction : MonoBehaviour, Action
 
   public void Execute()
   {
-    bulletManger.GetBullet(bulletSpawn.position);
+    bulletManager.GetBullet(bulletSpawn.position);
     // bullet.GetComponent<BulletController>();
     // throw new System.NotImplementedException();
   }

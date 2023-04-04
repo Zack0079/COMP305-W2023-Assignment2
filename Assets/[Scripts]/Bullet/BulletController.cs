@@ -13,14 +13,14 @@ public class BulletController : MonoBehaviour
   [Range(1.0f, 100.0f)]
   public float force;
 
-  public BulletManger bulletManger;
+  public BulletManager bulletManager;
 
 
   private void Awake()
   {
     rigidbody2D = GetComponent<Rigidbody2D>();
     player = FindObjectOfType<PlayerBehaviour>().transform;
-    bulletManger = FindObjectOfType<BulletManger>();
+    bulletManager = FindObjectOfType<BulletManager>();
   }
 
   // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class BulletController : MonoBehaviour
   {
     // rigidbody2D = GetComponent<Rigidbody2D>();
     // player = FindObjectOfType<PlayerBehaviour>().transform;
-    // bulletManger = FindObjectOfType<BulletManger>();
+    // bulletManager = FindObjectOfType<bulletManager>();
   }
   // Update is called once per frame
   void Update()
@@ -59,7 +59,7 @@ public class BulletController : MonoBehaviour
   {
     if (gameObject.activeInHierarchy)
     {
-      bulletManger.ReturnBullet(gameObject);
+      bulletManager.ReturnBullet(gameObject);
     }
   }
 
