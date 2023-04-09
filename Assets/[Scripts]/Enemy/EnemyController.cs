@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-  private Rigidbody2D rigidbody2D;
   [Header("Enemy Movement Properties")]
   public float horizontalSpeed = 1.0f;
   public Transform inFrontCheck;
@@ -23,6 +22,7 @@ public class EnemyController : MonoBehaviour
   public RampDirection rampDirection;
   public bool isRampInFront;
 
+  private Rigidbody2D rigidbody2D;
   // Start is called before the first frame update
   void Start()
   {

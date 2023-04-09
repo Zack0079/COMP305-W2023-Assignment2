@@ -5,11 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class QuestManager : MonoBehaviour
 {
-
   [Header("Quest Manager Properties")]
   public GameObject player;
   public Transform startLocation;
-  public List<Quest> quests;
+  public List<PathFollowingQuest> quests;
   public PathFollowingQuest currentQuest;
   public List<Transform> path;
 

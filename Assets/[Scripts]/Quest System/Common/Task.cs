@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 [System.Serializable]
 public class Task
@@ -22,12 +22,14 @@ public class Task
     this.nextTask = nextTask;
     this.state = state;
 
-    if(this.prevTask != null && this.prevTask.state != ProgressState.COMPLETED){
+    if ((this.prevTask != null) && (this.prevTask.state != ProgressState.COMPLETED))
+    {
       this.state = ProgressState.INVALID;
     }
   }
 
-  public virtual bool Condition(){
+  public virtual bool Condition()
+  {
     return false;
   }
 }

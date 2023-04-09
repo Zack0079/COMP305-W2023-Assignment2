@@ -1,8 +1,9 @@
-using System.Collections;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Quest
 {
   [Header("Quest Properties")]
@@ -18,9 +19,13 @@ public class Quest
     this.id = DateTime.Now.Millisecond.ToString();
     this.name = name;
     this.state = state;
-    tasks = new List<Task>(); // creates a new empty Task collection (container)
+    tasks = new List<Task>();
     this.currentTask = rootTask;
+    tasks.Add(rootTask);
   }
 
-  public virtual void BuildQuest(){}
+  public virtual void BuildQuest()
+  {
+
+  }
 }
