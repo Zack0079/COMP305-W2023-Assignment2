@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cefbc1120d6c534698c85568fb3b45b, type: 3}
+  m_Name: LocationTask 2
+  m_EditorClassIdentifier: 
+  name: LocationTask 2
+  prevTask: {fileID: 11400000, guid: 535ea5a3784578d4492e0ba9f8900e09, type: 2}
+  nextTask: {fileID: 11400000, guid: e978f8e5f4bf155478176265a36f70a8, type: 2}
+  state: 1
+  text:
+    abandoned: 
+    completed: 
+    failed: 
+    hidden: 
+    inProgress: 
+    invalid: 
+    notStarted: 
+  targetPosition: {x: 0.7199997, y: -1.9984715}
+  taskPosition: {x: -5.49, y: 1.63}

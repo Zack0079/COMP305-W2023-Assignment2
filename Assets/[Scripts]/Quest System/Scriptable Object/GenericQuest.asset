@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b87aa5cee323c48a5dc49d90c1334f, type: 3}
+  m_Name: GenericQuest
+  m_EditorClassIdentifier: 
+  name: 
+  state: 1
+  text:
+    abandoned: 
+    completed: 
+    failed: 
+    hidden: 
+    inProgress: 
+    invalid: 
+    notStarted: 
+  tasks:
+  - {fileID: 11400000, guid: 535ea5a3784578d4492e0ba9f8900e09, type: 2}
+  - {fileID: 11400000, guid: 03a657014a559c84f9dc4bae164d8a80, type: 2}
+  - {fileID: 11400000, guid: e978f8e5f4bf155478176265a36f70a8, type: 2}
+  currentTask: {fileID: 11400000, guid: e978f8e5f4bf155478176265a36f70a8, type: 2}
+  targetPosition: {x: 0.7199997, y: -1.9984715}
