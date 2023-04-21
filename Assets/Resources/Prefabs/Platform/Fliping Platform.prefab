@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6331924474806315101}
   - component: {fileID: 6331924474806315100}
   - component: {fileID: 7303532974844383112}
-  - component: {fileID: 6331924474806315099}
   - component: {fileID: 7303532974844383115}
   m_Layer: 11
   m_Name: Fliping Platform
@@ -122,7 +121,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -137,18 +136,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 2.0119522}
   m_EdgeRadius: 0
---- !u!114 &6331924474806315099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6331924474806315103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb1bd921792c3c74382b9d195fec026a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7303532974844383115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8edbf5b614c1dfc468dfbb739d64b973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipingTime: 5
+  flipingTime: 3
 --- !u!1001 &1699451146026023589
 PrefabInstance:
   m_ObjectHideFlags: 0
