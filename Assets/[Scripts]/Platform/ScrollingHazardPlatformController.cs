@@ -2,61 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatformController : MonoBehaviour
+public class ScrollingHazardPlatformController : PlatformController
 {
   [Header("Movement Properties")]
-  [Range(0.01f, 0.2f)]
+  [Range(0.001f, 0.2f)]
   public float speedValue = 0.02f;
   public bool timeIsActive = true;
-  public bool isLooping;
-  public bool isReverse;
+  public GameObject scrollingHazard;
 
-  [Header("Platform Path Points")]
+
+  [Header("Hazard Path Points")]
   public List<PathNode> pathNodes;
-
   private Vector2 startPoint;
   private Vector2 endPoint;
   private PathNode currentNode;
+  private bool isScrollBack = false;
   private float timer;
-
+  private int size = 0;
+  private int currentIndex = 0;
 
   // Start is called before the first frame update
   void Start()
   {
     timer = 0.0f;
-    startPoint = transform.position;
+    startPoint = scrollingHazard.transform.position;
     BuildPathNodes();
   }
 
   // Update is called once per frame
   private void BuildPathNodes()
   {
-    foreach (Transform child in transform)
+    foreach (Transform child in this.gameObject.transform.GetChild(0))
     {
       var pathNode = new PathNode(child.position, null, null);
       pathNodes.Add(pathNode);
     }
-
-    for (var i = 0; i < pathNodes.Count; i++)
+    size = pathNodes.Count;
+    for (var i = 0; i < size; i++)
     {
       pathNodes[i].next = (i == pathNodes.Count - 1) ? pathNodes[0] : pathNodes[i + 1];
       pathNodes[i].prev = (i == 0) ? pathNodes[^1] : pathNodes[i - 1];
     }
-
     currentNode = pathNodes[0];
     startPoint = currentNode.position;
     endPoint = currentNode.next.position;
-    Traverse((isReverse) ? 0 : ^1, (isReverse) ? currentNode.prev : currentNode.next);
-  }
-
-
-  void Update()
-  {
-    Move();
+    Traverse(^1, currentNode.next);
   }
 
   void FixedUpdate()
   {
+    Move();
+
     if (timeIsActive)
     {
       if (timer <= 1.0f)
@@ -66,33 +62,37 @@ public class MovingPlatformController : MonoBehaviour
 
       if (timer > 1.0f)
       {
+
         timer = 0.0f;
-        Traverse((isReverse) ? 0 : ^1, (isReverse) ? currentNode.prev : currentNode.next);
+        Traverse((isScrollBack) ? 0 : ^1, (isScrollBack) ? currentNode.prev : currentNode.next);
       }
     }
   }
 
   private void Move()
   {
-    transform.position = Vector2.Lerp(startPoint, endPoint, timer);
+    scrollingHazard.transform.position = Vector2.Lerp(startPoint, endPoint, timer);
   }
 
   private void Traverse(System.Index boundaryIndex, PathNode nextNode)
   {
-    startPoint = currentNode.position;
-    endPoint = nextNode.position;
 
     if (currentNode != pathNodes[boundaryIndex])
     {
+      startPoint = currentNode.position;
+      endPoint = nextNode.position;
       currentNode = nextNode;
     }
-    else if (currentNode == pathNodes[boundaryIndex] && (isLooping))
+    else if (currentNode == pathNodes[boundaryIndex])
     {
-      currentNode = nextNode;
-    }
-    else
-    {
-      timeIsActive = false;
+      startPoint = currentNode.position;
+      currentNode = boundaryIndex.Equals(0) ? currentNode.next : currentNode.prev;
+
+      endPoint = currentNode.position;
+      isScrollBack = !isScrollBack;
     }
   }
+
+
+
 }

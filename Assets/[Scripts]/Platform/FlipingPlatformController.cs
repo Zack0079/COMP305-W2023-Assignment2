@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlipingPlatformController : PlatformController
+public class FlipingPlatformController : MonoBehaviour
 {
   [SerializeField] private float flipingTime = 5.0f;
   private float direction = 1;

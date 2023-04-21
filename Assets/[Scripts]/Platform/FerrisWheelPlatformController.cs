@@ -27,10 +27,6 @@ public class FerrisWheelPlatformController : PlatformController
       yield return new WaitForEndOfFrame();
       float stopAngle = 2 * pi / stopFrequencyInCircle;
 
-      Debug.Log("angle:" + angle % stopAngle);
-
-
-
       if ((angle % stopAngle > 0.01 && angle % stopAngle < stopAngle - 0.01) && stop)
       {
         stop = false;
